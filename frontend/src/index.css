@@ -1,0 +1,464 @@
+@import "tailwindcss";
+
+/* SHIFT Design System - Gris Anthracite + Blanc */
+@theme {
+  /* Neutrals - La base */
+  --color-background: #FAFAFA;
+  --color-foreground: #1A1A1A;
+  --color-card: #FFFFFF;
+  --color-card-foreground: #1A1A1A;
+
+  /* Surfaces */
+  --color-surface: #FFFFFF;
+  --color-surface-hover: #F5F5F5;
+  --color-surface-active: #EBEBEB;
+
+  /* Anthracite scale */
+  --color-anthracite-900: #1A1A1A;
+  --color-anthracite-800: #2D2D2D;
+  --color-anthracite-700: #404040;
+  --color-anthracite-600: #525252;
+  --color-anthracite-500: #6B6B6B;
+  --color-anthracite-400: #8A8A8A;
+  --color-anthracite-300: #A3A3A3;
+  --color-anthracite-200: #D4D4D4;
+  --color-anthracite-100: #E5E5E5;
+  --color-anthracite-50: #F5F5F5;
+
+  /* Primary - Anthracite foncé */
+  --color-primary: #1A1A1A;
+  --color-primary-foreground: #FFFFFF;
+
+  /* Secondary */
+  --color-secondary: #F5F5F5;
+  --color-secondary-foreground: #1A1A1A;
+
+  /* Muted */
+  --color-muted: #F5F5F5;
+  --color-muted-foreground: #6B6B6B;
+
+  /* Accents subtils */
+  --color-accent: #E5E5E5;
+  --color-accent-foreground: #1A1A1A;
+
+  /* States */
+  --color-success: #1A1A1A;
+  --color-success-muted: #E5E5E5;
+  --color-destructive: #DC2626;
+  --color-destructive-foreground: #FFFFFF;
+
+  /* Borders */
+  --color-border: #E5E5E5;
+  --color-border-hover: #D4D4D4;
+  --color-input: #E5E5E5;
+  --color-ring: #1A1A1A;
+
+  /* Radius - Plus subtil */
+  --radius: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-md: 0.5rem;
+  --radius-sm: 0.25rem;
+  --radius-full: 9999px;
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 98%;
+    --foreground: 0 0% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 10%;
+    --primary: 0 0% 10%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 10%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 42%;
+    --accent: 0 0% 90%;
+    --accent-foreground: 0 0% 10%;
+    --destructive: 0 84% 50%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 0 0% 10%;
+  }
+
+  * {
+    border-color: hsl(var(--border));
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: #FAFAFA;
+    color: #1A1A1A;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+    letter-spacing: -0.011em;
+  }
+
+  /* Typography scale */
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 500;
+    letter-spacing: -0.02em;
+  }
+}
+
+/* ============================================
+   SHIFT Specific Components
+   ============================================ */
+
+/* Container desktop */
+.shift-container {
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .shift-container {
+    max-width: 100%;
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 0;
+    min-height: 100vh;
+  }
+}
+
+@media (min-width: 1200px) {
+  .shift-container {
+    grid-template-columns: 320px 1fr 320px;
+  }
+}
+
+/* Cards - Très subtiles */
+.shift-card {
+  background: #FFFFFF;
+  border: 1px solid #E5E5E5;
+  border-radius: 0.75rem;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.shift-card:hover {
+  border-color: #D4D4D4;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.shift-card:active {
+  transform: scale(0.995);
+  background: #FAFAFA;
+}
+
+/* Buttons avec satisfaction au clic */
+.shift-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  font-size: 0.875rem;
+  letter-spacing: -0.01em;
+  border-radius: 0.5rem;
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  user-select: none;
+}
+
+.shift-btn-primary {
+  background: #1A1A1A;
+  color: #FFFFFF;
+  padding: 0.75rem 1.5rem;
+  border: none;
+}
+
+.shift-btn-primary:hover {
+  background: #2D2D2D;
+}
+
+.shift-btn-primary:active {
+  background: #404040;
+  transform: scale(0.98);
+}
+
+.shift-btn-secondary {
+  background: transparent;
+  color: #1A1A1A;
+  border: 1px solid #E5E5E5;
+  padding: 0.75rem 1.5rem;
+}
+
+.shift-btn-secondary:hover {
+  background: #F5F5F5;
+  border-color: #D4D4D4;
+}
+
+.shift-btn-secondary:active {
+  background: #EBEBEB;
+  transform: scale(0.98);
+}
+
+/* Ghost button - Très minimal */
+.shift-btn-ghost {
+  background: transparent;
+  color: #6B6B6B;
+  border: none;
+  padding: 0.5rem 0.75rem;
+}
+
+.shift-btn-ghost:hover {
+  color: #1A1A1A;
+  background: #F5F5F5;
+}
+
+/* Status indicators - Subtils */
+.shift-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
+
+.shift-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.shift-status-active {
+  color: #1A1A1A;
+}
+
+.shift-status-pending {
+  color: #6B6B6B;
+}
+
+.shift-status-completed {
+  color: #A3A3A3;
+}
+
+/* Progress bar */
+.shift-progress {
+  height: 2px;
+  background: #E5E5E5;
+  border-radius: 1px;
+  overflow: hidden;
+}
+
+.shift-progress-bar {
+  height: 100%;
+  background: #1A1A1A;
+  transition: width 0.3s ease;
+}
+
+/* Dividers */
+.shift-divider {
+  height: 1px;
+  background: #E5E5E5;
+  margin: 1rem 0;
+}
+
+/* Input fields */
+.shift-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: #FFFFFF;
+  border: 1px solid #E5E5E5;
+  border-radius: 0.5rem;
+  font-size: 0.9375rem;
+  color: #1A1A1A;
+  transition: all 0.15s ease;
+}
+
+.shift-input:hover {
+  border-color: #D4D4D4;
+}
+
+.shift-input:focus {
+  outline: none;
+  border-color: #1A1A1A;
+  box-shadow: 0 0 0 3px rgba(26, 26, 26, 0.08);
+}
+
+.shift-input::placeholder {
+  color: #A3A3A3;
+}
+
+/* Recording button - Épuré */
+.shift-record {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #1A1A1A;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+}
+
+.shift-record:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(26, 26, 26, 0.15);
+}
+
+.shift-record:active {
+  transform: scale(0.95);
+}
+
+.shift-record-active {
+  background: #DC2626;
+  animation: pulse-recording 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse-recording {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 16px rgba(220, 38, 38, 0);
+  }
+}
+
+/* Timeline - Pour voir la progression */
+.shift-timeline {
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.shift-timeline::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: #E5E5E5;
+}
+
+.shift-timeline-item {
+  position: relative;
+  padding-bottom: 1.5rem;
+}
+
+.shift-timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -1.5rem;
+  top: 0.375rem;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #E5E5E5;
+  border: 2px solid #FAFAFA;
+}
+
+.shift-timeline-item.completed::before {
+  background: #1A1A1A;
+}
+
+.shift-timeline-item.active::before {
+  background: #1A1A1A;
+  box-shadow: 0 0 0 4px rgba(26, 26, 26, 0.1);
+}
+
+/* Hover satisfaction */
+.hover-lift {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+/* Click feedback */
+.click-scale {
+  transition: transform 0.1s ease;
+}
+
+.click-scale:active {
+  transform: scale(0.98);
+}
+
+/* Skeleton loading */
+.shift-skeleton {
+  background: linear-gradient(90deg, #F5F5F5 25%, #EBEBEB 50%, #F5F5F5 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 0.25rem;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Safe areas mobile */
+.safe-top {
+  padding-top: max(env(safe-area-inset-top), 1rem);
+}
+
+.safe-bottom {
+  padding-bottom: max(env(safe-area-inset-bottom), 1rem);
+}
+
+/* Bottom nav desktop hidden */
+@media (min-width: 768px) {
+  .mobile-nav {
+    display: none;
+  }
+}
+
+/* Sidebar desktop */
+.shift-sidebar {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .shift-sidebar {
+    display: flex;
+    flex-direction: column;
+    background: #FFFFFF;
+    border-right: 1px solid #E5E5E5;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+  }
+}
+
+/* Scrollbar minimal */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #D4D4D4;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #A3A3A3;
+}
+
+/* Focus states accessibles */
+:focus-visible {
+  outline: 2px solid #1A1A1A;
+  outline-offset: 2px;
+}
+
+/* Transitions globales */
+* {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
