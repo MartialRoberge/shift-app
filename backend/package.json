@@ -10,14 +10,7 @@
     "create-db": "tsx src/db/create-db.ts",
     "migrate": "tsx src/db/migrate.ts",
     "seed": "tsx src/db/seed.ts",
-    "create-test-shift": "tsx src/db/create-test-shift.ts",
-    "create-small-shift": "tsx src/db/create-small-shift.ts",
-    "check-xrpl": "tsx src/test/check-xrpl-balance.ts",
-    "diagnose-xrpl": "tsx src/test/diagnose-xrpl.ts",
-    "fix-xrpl-addresses": "tsx src/db/fix-xrpl-addresses.ts",
-    "setup-db": "npm run create-db && npm run migrate && npm run seed",
-    "test:simple": "tsx src/test/simple-test.ts",
-    "test:full": "tsx src/test/full-test.ts"
+    "setup-db": "npm run create-db && npm run migrate && npm run seed"
   },
   "keywords": ["xrpl", "timesheet", "blockchain"],
   "author": "",

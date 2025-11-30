@@ -1,0 +1,60 @@
+# Render Blueprint Configuration for Shift App
+# https://render.com/docs/blueprint-spec
+
+databases:
+  - name: shift-app-db
+    plan: free
+    databaseName: shiftapp
+    user: shiftapp
+
+services:
+  # Backend API
+  - type: web
+    name: shift-app-backend
+    runtime: node
+    plan: free
+    rootDir: backend
+    buildCommand: npm install && npm run build
+    startCommand: npm run migrate && npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
+      - key: DATABASE_URL
+        fromDatabase:
+          name: shift-app-db
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
+      - key: ASSEMBLYAI_API_KEY
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: XRPL_PLATFORM_SECRET
+        sync: false
+      - key: XRPL_NETWORK
+        value: testnet
+      - key: CORS_ORIGIN
+        sync: false
+
+  # Frontend Static Site
+  - type: web
+    name: shift-app-frontend
+    runtime: static
+    plan: free
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    headers:
+      - path: /*
+        name: Cache-Control
+        value: public, max-age=0, must-revalidate
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: VITE_API_URL
+        sync: false
