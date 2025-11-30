@@ -36,7 +36,7 @@ export function AddressAutocomplete({
   const [highlightedIndex, setHighlightedIndex] = useState(-1)
   const inputRef = useRef<HTMLInputElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
-  const debounceRef = useRef<ReturnType<typeof setTimeout>>()
+  const debounceRef = useRef<number | null>(null)
 
   // Recherche d'adresses avec debounce
   const searchAddresses = useCallback(async (query: string) => {
@@ -77,17 +77,17 @@ export function AddressAutocomplete({
 
   // Debounce la recherche
   useEffect(() => {
-    if (debounceRef.current) {
-      clearTimeout(debounceRef.current)
+    if (debounceRef.current !== null) {
+      window.clearTimeout(debounceRef.current)
     }
 
-    debounceRef.current = setTimeout(() => {
+    debounceRef.current = window.setTimeout(() => {
       searchAddresses(value)
     }, 300)
 
     return () => {
-      if (debounceRef.current) {
-        clearTimeout(debounceRef.current)
+      if (debounceRef.current !== null) {
+        window.clearTimeout(debounceRef.current)
       }
     }
   }, [value, searchAddresses])
