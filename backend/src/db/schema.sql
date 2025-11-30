@@ -1,14 +1,22 @@
 -- Extension pour UUID
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
--- Enum pour les rôles
-CREATE TYPE user_role AS ENUM ('worker', 'employer', 'admin');
+-- Enum pour les rôles (IF NOT EXISTS)
+DO $$ BEGIN
+    CREATE TYPE user_role AS ENUM ('worker', 'employer', 'admin');
+EXCEPTION
+    WHEN duplicate_object THEN null;
+END $$;
 
--- Enum pour le statut des shifts
-CREATE TYPE shift_status AS ENUM ('proposed', 'validated', 'disputed', 'paid', 'refused');
+-- Enum pour le statut des shifts (IF NOT EXISTS)
+DO $$ BEGIN
+    CREATE TYPE shift_status AS ENUM ('proposed', 'validated', 'disputed', 'paid', 'refused');
+EXCEPTION
+    WHEN duplicate_object THEN null;
+END $$;
 
 -- Table users
-CREATE TABLE users (
+CREATE TABLE IF NOT EXISTS users (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     role user_role NOT NULL,
     name TEXT NOT NULL,
@@ -20,7 +28,7 @@ CREATE TABLE users (
 );
 
 -- Table work_sessions
-CREATE TABLE work_sessions (
+CREATE TABLE IF NOT EXISTS work_sessions (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     worker_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
     employer_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
@@ -45,8 +53,8 @@ CREATE TABLE work_sessions (
 );
 
 -- Index pour améliorer les performances
-CREATE INDEX idx_work_sessions_worker ON work_sessions(worker_id);
-CREATE INDEX idx_work_sessions_employer ON work_sessions(employer_id);
-CREATE INDEX idx_work_sessions_status ON work_sessions(status);
-CREATE INDEX idx_work_sessions_created ON work_sessions(created_at);
+CREATE INDEX IF NOT EXISTS idx_work_sessions_worker ON work_sessions(worker_id);
+CREATE INDEX IF NOT EXISTS idx_work_sessions_employer ON work_sessions(employer_id);
+CREATE INDEX IF NOT EXISTS idx_work_sessions_status ON work_sessions(status);
+CREATE INDEX IF NOT EXISTS idx_work_sessions_created ON work_sessions(created_at);
 
