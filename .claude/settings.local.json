@@ -33,7 +33,10 @@
       "Bash(gh repo create:*)",
       "Bash(git checkout:*)",
       "Bash(git push:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(PGPASSWORD=\"z6BtRfsQPMVsMxoYrZHrac3gRuF2x2aS\" psql:*)",
+      "Bash(DATABASE_URL=\"postgresql://shiftapp:z6BtRfsQPMVsMxoYrZHrac3gRuF2x2aS@dpg-d4m0t4vpm1nc73ckuf2g-a.oregon-postgres.render.com/shiftapp_6zjx\" npx tsx:*)",
+      "Bash(DATABASE_URL=\"postgresql://shiftapp:z6BtRfsQPMVsMxoYrZHrac3gRuF2x2aS@dpg-d4m0t4vpm1nc73ckuf2g-a.oregon-postgres.render.com/shiftapp_6zjx?sslmode=require\" npx tsx:*)"
     ],
     "deny": [],
     "ask": []
