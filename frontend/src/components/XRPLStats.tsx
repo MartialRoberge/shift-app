@@ -12,7 +12,7 @@ interface XRPLTransaction {
   hash: string
   type: 'escrow_create' | 'escrow_finish' | 'nft_mint' | 'payment'
   amount: number
-  eurAmount: number
+  eurAmount?: number
   timestamp: string
   status: 'success' | 'pending' | 'failed'
   workerName?: string
@@ -319,7 +319,7 @@ export function XRPLStats({
                           </div>
                           <div className="flex items-center justify-between text-xs">
                             <span className="text-anthracite-400">Équivalent EUR</span>
-                            <span className="text-anthracite-600">{tx.eurAmount.toFixed(2)}€</span>
+                            <span className="text-anthracite-600">{(tx.eurAmount ?? xrpToEur(tx.amount)).toFixed(2)}€</span>
                           </div>
                           <div className="flex items-center justify-between text-xs">
                             <span className="text-anthracite-400">Heure</span>

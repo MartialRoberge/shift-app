@@ -36,7 +36,7 @@ export function AddressAutocomplete({
   const [highlightedIndex, setHighlightedIndex] = useState(-1)
   const inputRef = useRef<HTMLInputElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
-  const debounceRef = useRef<NodeJS.Timeout>()
+  const debounceRef = useRef<ReturnType<typeof setTimeout>>()
 
   // Recherche d'adresses avec debounce
   const searchAddresses = useCallback(async (query: string) => {

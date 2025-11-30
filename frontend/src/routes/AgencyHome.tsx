@@ -323,6 +323,8 @@ export function AgencyHome() {
         address: '',
         hourly_rate: 15,
         total_hours_needed: 100,
+        latitude: 48.8566,
+        longitude: 2.3522,
       })
     } catch (err: any) {
       console.error('Error creating mission:', err)
