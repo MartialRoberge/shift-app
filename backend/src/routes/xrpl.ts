@@ -339,7 +339,7 @@ router.get('/verify/:hash', async (req: express.Request, res: Response) => {
 
       await client.disconnect();
 
-      const tx = txResult.result;
+      const tx = txResult.result as any;
       const meta = typeof tx.meta === 'object' ? tx.meta : {};
 
       res.json({
@@ -347,8 +347,8 @@ router.get('/verify/:hash', async (req: express.Request, res: Response) => {
         hash: tx.hash,
         type: tx.TransactionType,
         account: tx.Account,
-        destination: (tx as any).Destination,
-        amount: (tx as any).Amount ? parseInt((tx as any).Amount) / 1000000 : null,
+        destination: tx.Destination,
+        amount: tx.Amount ? parseInt(tx.Amount) / 1000000 : null,
         result: (meta as any).TransactionResult,
         ledgerIndex: tx.ledger_index,
         date: tx.date,

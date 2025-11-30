@@ -1,10 +1,15 @@
-import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 import { UserRole } from '../types';
 
-export interface AuthRequest extends Request {
+export interface AuthRequest {
   userId?: string;
   userRole?: UserRole;
+  headers?: any;
+  body?: any;
+  params?: any;
+  query?: any;
+  file?: any;
+  [key: string]: any;
 }
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
@@ -12,7 +17,7 @@ const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
 /**
  * Middleware d'authentification JWT
  */
-export function authenticate(req: AuthRequest, res: Response, next: NextFunction) {
+export function authenticate(req: AuthRequest, res: any, next: any) {
   const token = req.headers.authorization?.replace('Bearer ', '');
 
   if (!token) {
@@ -33,7 +38,7 @@ export function authenticate(req: AuthRequest, res: Response, next: NextFunction
  * Middleware pour vérifier le rôle
  */
 export function requireRole(...roles: UserRole[]) {
-  return (req: AuthRequest, res: Response, next: NextFunction) => {
+  return (req: AuthRequest, res: any, next: any) => {
     if (!req.userRole || !roles.includes(req.userRole)) {
       return res.status(403).json({ error: 'Insufficient permissions' });
     }

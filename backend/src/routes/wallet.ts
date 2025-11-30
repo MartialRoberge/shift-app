@@ -39,8 +39,9 @@ router.post('/connect', async (req: express.Request, res: Response) => {
         account: wallet.address,
       });
 
-      const balance = parseFloat(accountInfo.result.account_data.Balance) / 1000000;
-      const sequence = accountInfo.result.account_data.Sequence;
+      const result = accountInfo.result as any;
+      const balance = parseFloat(result.account_data.Balance) / 1000000;
+      const sequence = result.account_data.Sequence;
 
       await client.disconnect();
 
@@ -115,8 +116,9 @@ router.get('/balance/:address', async (req: express.Request, res: Response) => {
         account: address,
       });
 
-      const balance = parseFloat(accountInfo.result.account_data.Balance) / 1000000;
-      const sequence = accountInfo.result.account_data.Sequence;
+      const result = accountInfo.result as any;
+      const balance = parseFloat(result.account_data.Balance) / 1000000;
+      const sequence = result.account_data.Sequence;
 
       await client.disconnect();
 
@@ -215,13 +217,13 @@ router.post('/send', async (req: express.Request, res: Response) => {
       const { xrpToDrops } = await import('xrpl');
 
       const payment = {
-        TransactionType: 'Payment',
+        TransactionType: 'Payment' as const,
         Account: wallet.address,
         Destination: to_address,
         Amount: xrpToDrops(amount),
       };
 
-      const prepared = await client.autofill(payment);
+      const prepared = await client.autofill(payment as any);
       const signed = wallet.sign(prepared);
       const result = await client.submitAndWait(signed.tx_blob);
 
